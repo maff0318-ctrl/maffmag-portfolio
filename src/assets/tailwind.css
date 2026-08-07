@@ -1,0 +1,355 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* NOTE: Web fonts (Inter, Work Sans, Playfair Display, Cormorant Garamond,
+   Noto Serif TC) are loaded via <link> tags in index.html. They must NOT be
+   re-imported here: a CSS @import placed after the @tailwind directives is
+   invalid and silently ignored by browsers, which previously caused the
+   editorial serif to fall back to Times New Roman. */
+
+@layer base {
+  /* Custom CSS Variables for Design Tokens */
+  :root {
+    /* Colors - Softer, more subtle palette */
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-dark: #2C2C2C;
+    --color-medium: #8B8B8B;
+    --color-light: #E8E8E8;
+    --color-accent: #4A90E2;
+    --color-accent-hover: #357ABD;
+    --color-overlay: rgba(0, 0, 0, 0.3);
+
+    /* Typography - Ultra thin weights */
+    --font-primary: 'Work Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    --font-weight-thin: 100;
+    --font-weight-extralight: 200;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+
+    /* Spacing */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-24: 6rem;
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 300ms ease;
+    --transition-slow: 500ms ease;
+  }
+
+  /* Reset and Base Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-light);
+    color: var(--color-dark);
+    background-color: var(--color-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Reserve space for the vertical scrollbar permanently so navigating
+       between scrollable pages/categories and short ones (e.g. an empty
+       "AFRICA" filter) never shifts content or the header horizontally. */
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: var(--color-white);
+  }
+
+  /* Typography Defaults - Very thin aesthetic */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-weight-thin);
+    color: var(--color-dark);
+    line-height: 1.2;
+    letter-spacing: 0.05em; /* Tighter default spacing */
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    letter-spacing: 0.08em; /* Reduced from 0.2em */
+  }
+
+  h2 {
+    font-size: 2rem;
+    letter-spacing: 0.06em; /* Reduced from 0.18em */
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    letter-spacing: 0.05em; /* Reduced from 0.15em */
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    letter-spacing: 0.04em; /* Reduced from 0.12em */
+  }
+
+  p {
+    line-height: 1.8;
+    color: var(--color-medium);
+    font-weight: var(--font-weight-light);
+  }
+
+  a {
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Remove default button styles */
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  /* Focus styles for accessibility */
+  *:focus {
+    outline: 1px solid var(--color-medium);
+    outline-offset: 2px;
+  }
+
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  *:focus-visible {
+    outline: 1px solid var(--color-medium);
+    outline-offset: 2px;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Remove border radius globally for sharp corners */
+  * {
+    border-radius: 0 !important;
+  }
+
+  /* Selection styling */
+  ::selection {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+  }
+}
+
+@layer components {
+  /* Minimalist Button Styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-light tracking-widest uppercase border border-minimal-black transition-all duration-300;
+  }
+
+  .btn-primary:hover {
+    @apply bg-minimal-black text-minimal-white;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-light tracking-wider text-minimal-dark transition-all duration-300;
+  }
+
+  .btn-secondary:hover {
+    @apply text-minimal-black underline;
+  }
+
+  /* Card Styles */
+  .card {
+    @apply bg-minimal-white p-6 transition-all duration-300;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Image Container */
+  .image-container {
+    @apply relative overflow-hidden;
+  }
+
+  .image-container img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+
+  .image-container:hover img {
+    @apply scale-105;
+  }
+
+  /* Overlay */
+  .overlay {
+    @apply absolute inset-0 bg-minimal-black bg-opacity-40;
+  }
+
+  /* Container utilities */
+  .container-minimal {
+    @apply w-full max-w-7xl mx-auto px-4 md:px-8;
+  }
+
+  .container-narrow {
+    @apply w-full max-w-5xl mx-auto px-4 md:px-8;
+  }
+
+  /* Text utilities */
+  .text-thin {
+    font-weight: var(--font-weight-thin);
+  }
+
+  .text-light {
+    font-weight: var(--font-weight-light);
+  }
+
+  .text-uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .text-spacing-wide {
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer utilities {
+  /* Custom tracking utilities - matching reference website style */
+  .tracking-tighter {
+    letter-spacing: -0.025em;
+  }
+  
+  .tracking-tight {
+    letter-spacing: -0.0125em;
+  }
+  
+  .tracking-normal {
+    letter-spacing: 0;
+  }
+  
+  .tracking-wide {
+    letter-spacing: 0.025em; /* Subtle spacing like reference */
+  }
+  
+  .tracking-wider {
+    letter-spacing: 0.05em; /* Still subtle */
+  }
+  
+  .tracking-widest {
+    letter-spacing: 0.075em; /* Not too wide */
+  }
+
+  /* Custom utilities */
+  .full-height {
+    min-height: 100vh;
+  }
+
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .aspect-photo {
+    aspect-ratio: 4 / 3;
+  }
+
+  .aspect-portrait {
+    aspect-ratio: 3 / 4;
+  }
+
+  .aspect-landscape {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Loading skeleton */
+  .skeleton {
+    @apply bg-minimal-light animate-pulse;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Transition utilities */
+  .transition-fade {
+    transition: opacity var(--transition-base);
+  }
+
+  .transition-transform-slow {
+    transition: transform 0.6s ease;
+  }
+
+  /* Grid utilities */
+  .grid-masonry {
+    column-count: 3;
+    column-gap: 0.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    .grid-masonry {
+      column-count: 2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .grid-masonry {
+      column-count: 2;
+    }
+  }
+
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

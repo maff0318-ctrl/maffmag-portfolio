@@ -1,0 +1,192 @@
+[
+  {
+    "id": "kyoto-2023",
+    "title": "Kyoto Temple",
+    "location": "Japan",
+    "continent": "Asia",
+    "year": 2023,
+    "coverImage": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1200&q=85",
+    "description": "A journey through ancient temples and modern streets of Kyoto",
+    "date": "March 2023",
+    "photoCount": 156,
+    "photos": [
+      {
+        "id": 1,
+        "url": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1200&q=85",
+        "caption": "清水寺的黄昏 / Kiyomizu-dera at dusk",
+        "description": "古老的寺庙在夕阳下散发着宁静的光芒 / The ancient temple glows peacefully in the evening sun"
+      },
+      {
+        "id": 2,
+        "url": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1200&q=85",
+        "caption": "伏见稻荷大社 / Fushimi Inari Shrine",
+        "description": "千本鸟居构成的神秘通道 / Mysterious pathway formed by thousands of torii gates"
+      },
+      {
+        "id": 3,
+        "url": "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200&q=85",
+        "caption": "竹林小径 / Bamboo forest path",
+        "description": "嵯峨野的竹林，阳光透过竹叶洒下斑驳的影子"
+      }
+    ]
+  },
+  {
+    "id": "iceland-2022",
+    "title": "Northern Lights",
+    "location": "Iceland",
+    "continent": "Europe",
+    "year": 2022,
+    "coverImage": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=85",
+    "description": "Chasing the aurora borealis across Iceland's stunning landscapes",
+    "date": "November 2022",
+    "photoCount": 203,
+    "photos": [
+      {
+        "id": 1,
+        "url": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=85",
+        "caption": "极光之夜 / Aurora Night",
+        "description": "The dancing lights painted the sky in vibrant greens and purples"
+      },
+      {
+        "id": 2,
+        "url": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=1200&q=85",
+        "caption": "冰川徒步 / Glacier Hiking",
+        "description": "Walking on ancient ice formations"
+      }
+    ]
+  },
+  {
+    "id": "santorini-2023",
+    "title": "Santorini Sunset",
+    "location": "Greece",
+    "continent": "Europe",
+    "year": 2023,
+    "coverImage": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&q=85",
+    "description": "Blue domes and white-washed buildings against the Aegean Sea",
+    "date": "June 2023",
+    "photoCount": 128,
+    "photos": [
+      {
+        "id": 1,
+        "url": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&q=85",
+        "caption": "Oia的日落 / Sunset in Oia",
+        "description": "世界上最美的日落之一 / One of the most beautiful sunsets in the world"
+      }
+    ]
+  },
+  {
+    "id": "machu-picchu-2021",
+    "title": "Machu Picchu",
+    "location": "Peru",
+    "continent": "South America",
+    "year": 2021,
+    "coverImage": "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=1200&q=85",
+    "description": "The Lost City of the Incas shrouded in morning mist",
+    "date": "September 2021",
+    "photoCount": 187,
+    "photos": [
+      {
+        "id": 1,
+        "url": "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=1200&q=85",
+        "caption": "晨雾中的马丘比丘 / Machu Picchu in morning mist",
+        "description": "The ancient ruins emerge from the clouds at sunrise"
+      }
+    ]
+  },
+  {
+    "id": "swiss-alps-2022",
+    "title": "Swiss Alps",
+    "location": "Switzerland",
+    "continent": "Europe",
+    "year": 2022,
+    "coverImage": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=85",
+    "description": "Mountain peaks, pristine lakes, and alpine villages",
+    "date": "July 2022",
+    "photoCount": 145,
+    "photos": []
+  },
+  {
+    "id": "morocco-2020",
+    "title": "Desert Dunes",
+    "location": "Morocco",
+    "continent": "Africa",
+    "year": 2020,
+    "coverImage": "https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=1200&q=85",
+    "description": "Golden sands of the Sahara and vibrant markets of Marrakech",
+    "date": "February 2020",
+    "photoCount": 167,
+    "photos": []
+  },
+  {
+    "id": "bali-2023",
+    "title": "Tropical Paradise",
+    "location": "Bali",
+    "continent": "Asia",
+    "year": 2023,
+    "coverImage": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=85",
+    "description": "Rice terraces, ancient temples, and pristine beaches",
+    "date": "August 2023",
+    "photoCount": 213,
+    "photos": []
+  },
+  {
+    "id": "venice-2022",
+    "title": "Venice Canals",
+    "location": "Italy",
+    "continent": "Europe",
+    "year": 2022,
+    "coverImage": "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=1200&q=85",
+    "description": "Gondolas, bridges, and Renaissance architecture on water",
+    "date": "May 2022",
+    "photoCount": 134,
+    "photos": []
+  },
+  {
+    "id": "new-york-2024",
+    "title": "New York Skyline",
+    "location": "USA",
+    "continent": "North America",
+    "year": 2024,
+    "coverImage": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=1200&q=85",
+    "description": "The city that never sleeps, from Brooklyn to Manhattan",
+    "date": "January 2024",
+    "photoCount": 198,
+    "photos": []
+  },
+  {
+    "id": "great-barrier-reef-2021",
+    "title": "Great Barrier Reef",
+    "location": "Australia",
+    "continent": "Oceania",
+    "year": 2021,
+    "coverImage": "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=1200&q=85",
+    "description": "Underwater paradise and tropical coastlines",
+    "date": "December 2021",
+    "photoCount": 176,
+    "photos": []
+  },
+  {
+    "id": "cherry-blossoms-2023",
+    "title": "Cherry Blossoms",
+    "location": "Japan",
+    "continent": "Asia",
+    "year": 2023,
+    "coverImage": "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1200&q=85",
+    "description": "Sakura season across Tokyo and Kyoto",
+    "date": "April 2023",
+    "photoCount": 189,
+    "photos": []
+  },
+  {
+    "id": "ireland-2022",
+    "title": "Northern Coast",
+    "location": "Ireland",
+    "continent": "Europe",
+    "year": 2022,
+    "coverImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85",
+    "description": "Dramatic cliffs, green valleys, and ancient castles",
+    "date": "October 2022",
+    "photoCount": 142,
+    "photos": []
+  }
+]

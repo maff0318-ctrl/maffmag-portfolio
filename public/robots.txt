@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block admin routes from crawling
+Disallow: /admin/
+
+Sitemap: https://www.maffmag.com/sitemap.xml

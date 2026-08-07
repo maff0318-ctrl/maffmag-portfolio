@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "albumId": "kyoto-2023",
+    "title": "Kyoto Temple",
+    "location": "Japan",
+    "continent": "Asia",
+    "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1200&q=85",
+    "aspect": "landscape",
+    "featured": true,
+    "year": 2023
+  },
+  {
+    "id": 2,
+    "albumId": "iceland-2022",
+    "title": "Northern Lights",
+    "location": "Iceland",
+    "continent": "Europe",
+    "image": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=85",
+    "aspect": "portrait",
+    "featured": true,
+    "year": 2022
+  },
+  {
+    "id": 3,
+    "albumId": "santorini-2023",
+    "title": "Santorini Sunset",
+    "location": "Greece",
+    "continent": "Europe",
+    "image": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&q=85",
+    "aspect": "landscape",
+    "featured": false,
+    "year": 2023
+  },
+  {
+    "id": 4,
+    "albumId": "machu-picchu-2021",
+    "title": "Machu Picchu",
+    "location": "Peru",
+    "continent": "South America",
+    "image": "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=1200&q=85",
+    "aspect": "landscape",
+    "featured": true,
+    "year": 2021
+  },
+  {
+    "id": 5,
+    "albumId": "swiss-alps-2022",
+    "title": "Swiss Alps",
+    "location": "Switzerland",
+    "continent": "Europe",
+    "image": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=85",
+    "aspect": "portrait",
+    "featured": false,
+    "year": 2022
+  },
+  {
+    "id": 6,
+    "albumId": "morocco-2020",
+    "title": "Desert Dunes",
+    "location": "Morocco",
+    "continent": "Africa",
+    "image": "https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=1200&q=85",
+    "aspect": "landscape",
+    "featured": false,
+    "year": 2020
+  },
+  {
+    "id": 7,
+    "albumId": "bali-2023",
+    "title": "Tropical Paradise",
+    "location": "Bali",
+    "continent": "Asia",
+    "image": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=85",
+    "aspect": "landscape",
+    "featured": false,
+    "year": 2023
+  },
+  {
+    "id": 8,
+    "albumId": "venice-2022",
+    "title": "Venice Canals",
+    "location": "Italy",
+    "continent": "Europe",
+    "image": "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=1200&q=85",
+    "aspect": "portrait",
+    "featured": false,
+    "year": 2022
+  },
+  {
+    "id": 9,
+    "albumId": "new-york-2024",
+    "title": "New York Skyline",
+    "location": "USA",
+    "continent": "North America",
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=1200&q=85",
+    "aspect": "landscape",
+    "featured": false,
+    "year": 2024
+  },
+  {
+    "id": 10,
+    "albumId": "great-barrier-reef-2021",
+    "title": "Great Barrier Reef",
+    "location": "Australia",
+    "continent": "Oceania",
+    "image": "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=1200&q=85",
+    "aspect": "landscape",
+    "featured": false,
+    "year": 2021
+  },
+  {
+    "id": 11,
+    "albumId": "cherry-blossoms-2023",
+    "title": "Cherry Blossoms",
+    "location": "Japan",
+    "continent": "Asia",
+    "image": "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1200&q=85",
+    "aspect": "portrait",
+    "featured": false,
+    "year": 2023
+  },
+  {
+    "id": 12,
+    "albumId": "ireland-2022",
+    "title": "Northern Coast",
+    "location": "Ireland",
+    "continent": "Europe",
+    "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85",
+    "aspect": "landscape",
+    "featured": false,
+    "year": 2022
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "title": "Journey Through Japan",
+    "slug": "journey-through-japan",
+    "location": "Japan",
+    "dateRange": "March 2024",
+    "excerpt": "Two weeks exploring ancient temples, bustling cities, and serene mountain landscapes. From Tokyo's neon-lit streets to Kyoto's peaceful bamboo forests.",
+    "heroImage": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1200&q=85",
+    "duration": "14 days",
+    "highlights": ["Tokyo", "Kyoto", "Osaka", "Mount Fuji"]
+  },
+  {
+    "id": 2,
+    "title": "Icelandic Adventure",
+    "slug": "icelandic-adventure",
+    "location": "Iceland",
+    "dateRange": "January 2024",
+    "excerpt": "Chasing the Northern Lights across volcanic landscapes. Waterfalls, glaciers, and geothermal hot springs in the land of fire and ice.",
+    "heroImage": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=85",
+    "duration": "10 days",
+    "highlights": ["Northern Lights", "Blue Lagoon", "Golden Circle", "Glacier Hiking"]
+  },
+  {
+    "id": 3,
+    "title": "Greek Island Hopping",
+    "slug": "greek-island-hopping",
+    "location": "Greece",
+    "dateRange": "June 2023",
+    "excerpt": "Island hopping through the Cyclades. White-washed buildings, stunning sunsets, and crystal-clear Mediterranean waters.",
+    "heroImage": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&q=85",
+    "duration": "12 days",
+    "highlights": ["Santorini", "Mykonos", "Paros", "Naxos"]
+  },
+  {
+    "id": 4,
+    "title": "Peruvian Explorer",
+    "slug": "peruvian-explorer",
+    "location": "Peru",
+    "dateRange": "September 2023",
+    "excerpt": "From Lima to Machu Picchu, tracing the footsteps of ancient civilizations. Mountain treks, jungle adventures, and rich cultural heritage.",
+    "heroImage": "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=1200&q=85",
+    "duration": "16 days",
+    "highlights": ["Machu Picchu", "Cusco", "Rainbow Mountain", "Amazon Jungle"]
+  },
+  {
+    "id": 5,
+    "title": "Swiss Alps Expedition",
+    "slug": "swiss-alps-expedition",
+    "location": "Switzerland",
+    "dateRange": "December 2023",
+    "excerpt": "Winter wonderland in the heart of Europe. Snow-capped peaks, charming villages, and world-class skiing in the Swiss Alps.",
+    "heroImage": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=85",
+    "duration": "8 days",
+    "highlights": ["Zermatt", "Interlaken", "Jungfraujoch", "Lucerne"]
+  },
+  {
+    "id": 6,
+    "title": "Moroccan Discovery",
+    "slug": "moroccan-discovery",
+    "location": "Morocco",
+    "dateRange": "April 2023",
+    "excerpt": "Wandering through ancient medinas, sleeping under desert stars, and exploring the vibrant colors of Morocco.",
+    "heroImage": "https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=1200&q=85",
+    "duration": "11 days",
+    "highlights": ["Marrakech", "Sahara Desert", "Fes", "Chefchaouen"]
+  }
+]
