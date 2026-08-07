@@ -84,9 +84,19 @@ const enterSite = () => {
     </div>
 
     <!-- Content -->
-    <div class="relative z-10 h-full flex flex-col items-center justify-end px-4 pb-32">
-      <!-- Current Location -->
-      <div class="text-center mb-8 animate-slide-up" style="animation-delay: 100ms">
+    <!--
+      Mobile  (<md): justify-between distributes the three elements top→center→bottom.
+               pt-safe-top + pt-12 keeps location text below the status bar.
+      Desktop (≥md): justify-end + pb-32 keeps the original stacked-at-bottom layout.
+      Typography, logo size, and all text classes are untouched.
+    -->
+    <div class="relative z-10 h-full flex flex-col items-center
+                justify-between pt-12 pb-28
+                md:justify-end md:pt-0 md:pb-32
+                px-4"
+         style="padding-top: max(3rem, env(safe-area-inset-top, 3rem))">
+      <!-- Current Location — top on mobile, bottom-stack on desktop -->
+      <div class="text-center animate-slide-up md:mb-8" style="animation-delay: 100ms">
         <p class="text-minimal-white text-xs tracking-[0.2em] uppercase opacity-60 mb-2">
           Currently Viewing
         </p>
@@ -95,8 +105,8 @@ const enterSite = () => {
         </p>
       </div>
 
-      <!-- Website Logo -->
-      <div class="mb-10 animate-fade-in" style="animation-delay: 200ms">
+      <!-- Website Logo — stays at absolute center on mobile via flex-grow spacer trick -->
+      <div class="mb-0 md:mb-10 animate-fade-in" style="animation-delay: 200ms">
         <!-- Inline SVG with only logo path, no background rectangle -->
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
@@ -109,8 +119,8 @@ const enterSite = () => {
         </svg>
       </div>
 
-      <!-- Enter Button - No hover reverse effect -->
-      <div class="animate-slide-up mb-16" style="animation-delay: 300ms">
+      <!-- Enter Button — bottom on mobile, bottom-stack on desktop -->
+      <div class="animate-slide-up mb-0 md:mb-16" style="animation-delay: 300ms">
         <button
           class="px-10 py-4 text-sm font-extralight tracking-[0.25em] uppercase text-minimal-white border border-minimal-white/80 transition-all duration-300 hover:opacity-80 hover:border-minimal-white"
           @click="enterSite"
