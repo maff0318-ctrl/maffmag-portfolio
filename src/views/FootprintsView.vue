@@ -567,10 +567,9 @@ const loadAlbums = async () => {
     // Force another update
     await nextTick()
     
-    if (map) {
-      // Re-initialize markers after albums load
-      initMap()
-    }
+    // Do NOT call initMap() here — it is already called in onMounted after
+    // loadAlbums() resolves. A second initMap() on mobile causes a visible
+    // map re-render that looks like Story Mode auto-starting.
   } catch (error) {
     console.error('❌ Error loading albums:', error)
     isLoading.value = false
