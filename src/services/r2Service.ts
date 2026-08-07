@@ -92,8 +92,9 @@ class R2Service {
 
     const uploadResults: R2UploadResult['variants'] = []
 
-    // Upload each variant
+    // Upload each variant — skip 'original', only upload web-optimised variants
     for (const variant of variants) {
+      if (variant.type === 'original') continue
       const fileName = this.generateFileName(albumId, photoId, variant.type)
       const fileBuffer = await variant.file.arrayBuffer()
 
@@ -118,7 +119,7 @@ class R2Service {
 
         const publicUrl = this.getPublicUrl(fileName)
         uploadResults.push({
-          type: variant.type,
+          type: variant.type as 'thumbnail' | 'medium' | 'large',
           url: publicUrl,
           width: variant.width,
           height: variant.height,
@@ -130,7 +131,7 @@ class R2Service {
         // Report progress
         if (onProgress) {
           onProgress({
-            variant: variant.type,
+            variant: variant.type as 'thumbnail' | 'medium' | 'large',
             loaded: variant.size,
             total: variant.size,
             percentage: 100,

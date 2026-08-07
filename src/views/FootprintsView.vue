@@ -240,7 +240,7 @@ const enhancedStats = computed(() => {
   const avgPhotosPerTrip = albums.value.length > 0 ? Math.round(totalPhotos / albums.value.length) : 0
   
   // Get years span
-  const years = albums.value.map(a => parseInt(a.year)).filter(y => !isNaN(y))
+  const years = albums.value.map(a => Number(a.year)).filter(y => !isNaN(y))
   const yearsActive = years.length > 0 ? Math.max(...years) - Math.min(...years) + 1 : 0
   
   return {
@@ -273,7 +273,7 @@ const timelineData = computed(() => {
     })
     .flat()
     .filter(item => item.coords)
-    .sort((a, b) => a.year.localeCompare(b.year))
+    .sort((a, b) => String(a.year).localeCompare(String(b.year)))
 })
 
 // Season determination and colors

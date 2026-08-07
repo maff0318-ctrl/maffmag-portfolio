@@ -74,7 +74,6 @@ const onImageLoad = () => {
       <div class="w-full h-full">
         <BaseImage
           :src="photo.image"
-          :photo="{ image_url: photo.image, placeholder_b64: photo.placeholder_b64 }"
           :alt="photo.title"
           :aspect-ratio="forceSquare ? 'square' : 'auto'"
           :lazy="!priority"

@@ -15,7 +15,7 @@ const translations = {
   contact: { en: 'Contact', zh: '聯絡' },
 
   // Common
-  photos: { en: 'PHOTOS', zh: '張相片' },
+  photoCount: { en: 'PHOTOS', zh: '張相片' },
   all: { en: 'All', zh: '全部' },
   loadingPhotos: { en: 'Loading photos...', zh: '載入相片中...' },
   loadMorePhotos: { en: 'Load More Photos', zh: '載入更多相片' },
