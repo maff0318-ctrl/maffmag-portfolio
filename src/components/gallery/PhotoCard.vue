@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import BaseImage from '@/components/ui/BaseImage.vue'
 
 interface Photo {
-  id: number
+  id: string
   albumId: string
   title: string
   location: string

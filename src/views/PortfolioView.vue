@@ -44,7 +44,7 @@ const setFilterButtonRef = (el: any, index: number) => {
 // underline indicator directly beneath it, relative to the filter bar.
 const updateIndicatorPosition = () => {
   const container = filterBarRef.value
-  const activeIndex = continentKeys.indexOf(selectedContinent.value)
+  const activeIndex = continentKeys.indexOf(selectedContinent.value as typeof continentKeys[number])
   const activeButton = filterButtonRefs.value[activeIndex]
 
   if (!container || !activeButton) return
@@ -186,8 +186,7 @@ watch(currentLang, async () => {
   requestAnimationFrame(() => requestAnimationFrame(updateIndicatorPosition))
 })
 
-const handlePhotoClick = (photo: Photo) => {
-  // Navigate to album detail page
+const handlePhotoClick = (photo: Photo): void => {
   router.push(`/album/${photo.albumId}`)
 }
 </script>
