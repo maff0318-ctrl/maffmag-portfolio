@@ -1048,19 +1048,7 @@ onMounted(async () => {
   // Then initialize map
   setTimeout(() => {
     initMap()
-    
-    // Animated entrance: Fly to first visited location after a delay
-    setTimeout(() => {
-      if (timelineData.value.length > 0 && map) {
-        const firstLocation = timelineData.value[0]
-        console.log('🎬 Entrance animation: Flying to', firstLocation.city)
-        
-        map.flyTo([firstLocation.coords.lat, firstLocation.coords.lng], 4, {
-          duration: 2,
-          easeLinearity: 0.2
-        })
-      }
-    }, 800) // Wait 800ms after map loads
+    // Map loads statically — Story Mode starts only when the user clicks Play.
   }, 100)
 })
 
