@@ -375,7 +375,6 @@ const initMap = () => {
     // and mobile emulators. Touch-scroll coexistence is handled below by
     // showing a two-finger hint overlay when a single finger touches the map.
     dragging: true,
-    tap: true,
     touchZoom: true,
     scrollWheelZoom: true,
     worldCopyJump: true,

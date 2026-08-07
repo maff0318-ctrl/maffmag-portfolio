@@ -117,7 +117,7 @@ const filteredPhotos = computed(() => {
   if (selectedContinent.value === 'All') {
     return photos.value
   }
-  return photos.value.filter((p) => p.continent === selectedContinent.value)
+  return photos.value.filter((p) => p.continent === selectedContinent.value as string)
 })
 
 // Only show a slice of the filtered albums; rest load in on "Load More"
