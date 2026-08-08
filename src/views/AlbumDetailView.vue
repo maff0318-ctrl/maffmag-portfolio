@@ -621,36 +621,21 @@ const totalPhotoCount = computed(
           class="hidden md:flex fixed inset-0 z-50 bg-minimal-black items-center justify-center"
           @click="closeLightbox"
         >
-          <!-- Close -->
-          <button
-            class="absolute top-6 right-[26%] text-minimal-white hover:text-minimal-light z-50 bg-minimal-black/50 hover:bg-minimal-black/70 p-2 backdrop-blur-sm transition-colors"
-            @click="closeLightbox"
-            aria-label="Close"
-          >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-          <!-- Prev -->
-          <button
-            class="absolute left-6 top-1/2 -translate-y-1/2 text-minimal-white hover:text-minimal-light bg-minimal-black/50 hover:bg-minimal-black/70 p-3 backdrop-blur-sm transition-colors"
-            @click.stop="previousPhoto"
-            aria-label="Previous photo"
-          >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <!-- Next -->
-          <button
-            class="absolute left-[calc(75%-3rem)] top-1/2 -translate-y-1/2 text-minimal-white hover:text-minimal-light bg-minimal-black/50 hover:bg-minimal-black/70 p-3 backdrop-blur-sm transition-colors"
-            @click.stop="nextPhoto"
-            aria-label="Next photo"
-          >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+          <!-- Close + counter: top-right row, counter left of close so they don't overlap -->
+          <div class="absolute top-6 right-6 z-50 flex items-center gap-3">
+            <div class="text-minimal-white text-xs font-light tracking-wider bg-minimal-black/70 px-3 py-1.5 backdrop-blur-sm">
+              {{ (currentPhotoIndex ?? 0) + 1 }} / {{ totalPhotos || photos.length }}
+            </div>
+            <button
+              class="text-minimal-white hover:text-minimal-light bg-minimal-black/50 hover:bg-minimal-black/70 p-2 backdrop-blur-sm transition-colors"
+              @click="closeLightbox"
+              aria-label="Close"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
 
           <div class="flex flex-row items-start justify-center w-full h-full" @click.stop>
             <!-- Photo 75% -->
@@ -667,33 +652,37 @@ const totalPhotoCount = computed(
                 style="max-width:100%; max-height:100%;"
               />
 
-              <!-- Desktop-only Previous arrow — hidden on first photo or single-photo albums -->
-              <button
-                v-if="photos.length > 1 && (currentPhotoIndex ?? 0) > 0"
-                class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center bg-black/40 hover:bg-black/70 text-white/70 hover:text-white backdrop-blur-sm transition-all duration-200 ease-out"
-                aria-label="Previous photo"
-                @click.stop="previousPhoto"
-              >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-              </button>
-
-              <!-- Desktop-only Next arrow — hidden on last photo or single-photo albums -->
-              <button
-                v-if="photos.length > 1 && (currentPhotoIndex ?? 0) < (totalPhotos || photos.length) - 1"
-                class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center bg-black/40 hover:bg-black/70 text-white/70 hover:text-white backdrop-blur-sm transition-all duration-200 ease-out"
-                aria-label="Next photo"
-                @click.stop="nextPhoto"
-              >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-              </button>
-
-              <div class="absolute top-6 right-6 text-minimal-white text-xs font-light tracking-wider bg-minimal-black/70 px-3 py-1.5 backdrop-blur-sm">
-                {{ (currentPhotoIndex ?? 0) + 1 }} / {{ totalPhotos || photos.length }}
-              </div>
+              <!-- FB-style navigation: left half = Prev, right half = Next.
+                   Desktop-only, invisible overlays with centred arrow icons.
+                   Hidden for single-photo albums. -->
+              <template v-if="photos.length > 1">
+                <!-- Left half — Previous -->
+                <div
+                  v-if="(currentPhotoIndex ?? 0) > 0"
+                  class="hidden md:flex absolute inset-y-0 left-0 w-1/2 items-center justify-start pl-4 cursor-pointer group/prev"
+                  aria-label="Previous photo"
+                  @click.stop="previousPhoto"
+                >
+                  <div class="w-11 h-11 flex items-center justify-center bg-black/0 group-hover/prev:bg-black/40 text-white/0 group-hover/prev:text-white/90 backdrop-blur-sm transition-all duration-200 ease-out">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                  </div>
+                </div>
+                <!-- Right half — Next -->
+                <div
+                  v-if="(currentPhotoIndex ?? 0) < (totalPhotos || photos.length) - 1"
+                  class="hidden md:flex absolute inset-y-0 right-0 w-1/2 items-center justify-end pr-4 cursor-pointer group/next"
+                  aria-label="Next photo"
+                  @click.stop="nextPhoto"
+                >
+                  <div class="w-11 h-11 flex items-center justify-center bg-black/0 group-hover/next:bg-black/40 text-white/0 group-hover/next:text-white/90 backdrop-blur-sm transition-all duration-200 ease-out">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                  </div>
+                </div>
+              </template>
             </div>
             <!-- Sidebar 25% -->
             <div class="flex-shrink-0 bg-white w-[25%] h-screen overflow-y-auto" style="min-width:280px;max-width:420px;">
