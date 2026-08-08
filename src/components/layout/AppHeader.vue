@@ -28,9 +28,9 @@ const navItems = [
 
 const positionClasses = computed(() => {
   switch (props.position) {
-    case 'fixed':  return 'fixed top-0 left-0 right-0 z-40'
-    case 'static': return 'relative z-40'
-    default:       return 'sticky top-0 z-40'
+    case 'fixed':  return 'fixed top-0 left-0 right-0 z-50'
+    case 'static': return 'relative z-50'
+    default:       return 'sticky top-0 z-50'
   }
 })
 
