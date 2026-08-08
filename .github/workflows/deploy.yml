@@ -40,6 +40,9 @@ jobs:
           VITE_R2_ACCESS_KEY_ID: ${{ secrets.VITE_R2_ACCESS_KEY_ID }}
           VITE_R2_SECRET_ACCESS_KEY: ${{ secrets.VITE_R2_SECRET_ACCESS_KEY }}
 
+      - name: Copy index.html → 404.html for SPA routing on GitHub Pages
+        run: cp dist/index.html dist/404.html
+
       - name: Deploy dist/ to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
