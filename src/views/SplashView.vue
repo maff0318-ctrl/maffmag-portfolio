@@ -7,6 +7,7 @@ const router = useRouter()
 
 const currentSlide = ref(0)
 const isTransitioning = ref(false)
+const isSlideUp = ref(false)          // mobile swipe-up exit animation
 
 const heroImages = [
   {
@@ -29,7 +30,6 @@ const heroImages = [
 let slideInterval: number | null = null
 
 onMounted(() => {
-  // Start slideshow if multiple images
   if (heroImages.length > 1) {
     slideInterval = window.setInterval(() => {
       nextSlide()
@@ -38,28 +38,60 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  if (slideInterval) {
-    clearInterval(slideInterval)
-  }
+  if (slideInterval) clearInterval(slideInterval)
 })
 
 const nextSlide = () => {
   currentSlide.value = (currentSlide.value + 1) % heroImages.length
 }
 
-const enterSite = () => {
-  isTransitioning.value = true
+// ---------- Swipe-up detection (mobile only) ----------
+let touchStartY = 0
+const SWIPE_THRESHOLD = 50          // px of upward movement needed
+
+const onTouchStart = (e: TouchEvent) => {
+  touchStartY = e.touches[0].clientY
+}
+
+const onTouchEnd = (e: TouchEvent) => {
+  const deltaY = touchStartY - e.changedTouches[0].clientY
+  if (deltaY > SWIPE_THRESHOLD) triggerSlideUp()
+}
+
+const triggerSlideUp = () => {
+  if (isTransitioning.value || isSlideUp.value) return
+  isSlideUp.value = true
+  // Navigate after the slide-up animation completes (600ms)
   setTimeout(() => {
     router.push('/portfolio')
-  }, 500)
+  }, 620)
+}
+// -------------------------------------------------------
+
+const enterSite = () => {
+  if (isTransitioning.value || isSlideUp.value) return
+  // On mobile, prefer the slide-up; on desktop keep the opacity fade
+  if (window.innerWidth < 768) {
+    triggerSlideUp()
+  } else {
+    isTransitioning.value = true
+    setTimeout(() => {
+      router.push('/portfolio')
+    }, 500)
+  }
 }
 </script>
 
 <template>
-  <div 
+  <div
     class="relative w-full h-screen overflow-hidden"
     :class="{ 'opacity-0': isTransitioning }"
-    style="transition: opacity 500ms ease-in-out"
+    :style="[
+      'transition: opacity 500ms ease-in-out',
+      isSlideUp ? 'transform: translateY(-100%); transition: transform 0.6s cubic-bezier(0.83, 0, 0.17, 1);' : ''
+    ]"
+    @touchstart.passive="onTouchStart"
+    @touchend.passive="onTouchEnd"
   >
     <!-- Background Slideshow -->
     <div class="absolute inset-0">
