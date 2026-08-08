@@ -33,6 +33,7 @@ const emit = defineEmits<{
 }>()
 
 const imageLoaded = ref(false)
+const cardReady = ref(false)         // true once the entry animation completes
 
 const handleClick = () => {
   emit('click', props.photo)
@@ -49,14 +50,24 @@ const onImageLoad = () => {
   imageLoaded.value = true
 }
 
+// Re-enable pointer-events once the fade-in animation settles so the
+// browser never misfires a click on a still-invisible card.
+const onCardAnimationEnd = () => {
+  cardReady.value = true
+}
+
 </script>
 
 <template>
   <!-- Parent Container: group relative overflow-hidden cursor-pointer -->
   <div
     class="group relative overflow-hidden cursor-pointer photo-card-container"
-    :class="{ 'photo-loaded': imageLoaded }"
+    :class="[
+      { 'photo-loaded': imageLoaded },
+      cardReady ? 'card-ready' : ''
+    ]"
     @click="handleClick"
+    @animationend="onCardAnimationEnd"
   >
     <!-- Inner Image Wrapper to constrain zoom effect -->
     <!-- transform + will-change + transform-gpu force this onto its own GPU
@@ -153,14 +164,24 @@ div, button, img {
   border-radius: 0 !important;
 }
 
-/* Fade-in animation for loaded images */
+/* Fade-in animation for loaded images.
+   pointer-events are disabled during the entry animation (card starts at
+   opacity:0) and re-enabled once the animation finishes via the .card-ready
+   class set by @animationend. This prevents the browser misfiring a click
+   on an element that is still invisible/mid-transition. */
 .photo-card-container {
   opacity: 0;
+  pointer-events: none;
   animation: fadeIn 0.4s ease-out forwards;
 }
 
 .photo-card-container.photo-loaded {
   opacity: 1;
+}
+
+/* Restore pointer-events once the entry animation has completed */
+.photo-card-container.card-ready {
+  pointer-events: auto;
 }
 
 @keyframes fadeIn {
