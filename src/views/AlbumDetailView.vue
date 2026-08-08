@@ -666,6 +666,31 @@ const totalPhotoCount = computed(
                 class="w-full h-full object-contain"
                 style="max-width:100%; max-height:100%;"
               />
+
+              <!-- Desktop-only Previous arrow — hidden on first photo or single-photo albums -->
+              <button
+                v-if="photos.length > 1 && (currentPhotoIndex ?? 0) > 0"
+                class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center bg-black/40 hover:bg-black/70 text-white/70 hover:text-white backdrop-blur-sm transition-all duration-200 ease-out"
+                aria-label="Previous photo"
+                @click.stop="previousPhoto"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+
+              <!-- Desktop-only Next arrow — hidden on last photo or single-photo albums -->
+              <button
+                v-if="photos.length > 1 && (currentPhotoIndex ?? 0) < (totalPhotos || photos.length) - 1"
+                class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center bg-black/40 hover:bg-black/70 text-white/70 hover:text-white backdrop-blur-sm transition-all duration-200 ease-out"
+                aria-label="Next photo"
+                @click.stop="nextPhoto"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
+
               <div class="absolute top-6 right-6 text-minimal-white text-xs font-light tracking-wider bg-minimal-black/70 px-3 py-1.5 backdrop-blur-sm">
                 {{ (currentPhotoIndex ?? 0) + 1 }} / {{ totalPhotos || photos.length }}
               </div>
