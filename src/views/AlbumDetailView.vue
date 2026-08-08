@@ -231,6 +231,39 @@ const goBack = () => {
   router.push('/portfolio')
 }
 
+// ── Mobile swipe navigation in the lightbox ───────────────────────────────
+// Swipe left  → next photo
+// Swipe right → previous photo
+// Edge protection: if the touch starts within 40px of the left screen edge,
+// pass through without intercepting so iOS "swipe back" still works.
+const SWIPE_MIN = 50         // minimum px of horizontal movement to count
+const EDGE_GUARD = 40        // px from left edge that we leave to the browser
+
+let swipeTouchStartX = 0
+let swipeTouchStartY = 0
+
+const onLightboxTouchStart = (e: TouchEvent) => {
+  swipeTouchStartX = e.touches[0].clientX
+  swipeTouchStartY = e.touches[0].clientY
+}
+
+const onLightboxTouchEnd = (e: TouchEvent) => {
+  // Ignore if started in the left-edge zone (let browser handle back gesture)
+  if (swipeTouchStartX < EDGE_GUARD) return
+
+  const dx = e.changedTouches[0].clientX - swipeTouchStartX
+  const dy = e.changedTouches[0].clientY - swipeTouchStartY
+
+  // Only register as a horizontal swipe if X movement dominates
+  if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) < Math.abs(dy)) return
+
+  if (dx < 0) {
+    nextPhoto()       // swipe left → forward
+  } else {
+    previousPhoto()   // swipe right → back
+  }
+}
+
 const toggleViewMode = () => {
   viewMode.value = viewMode.value === 'grid' ? 'story' : 'grid'
 }
@@ -523,7 +556,11 @@ const totalPhotoCount = computed(
           @click.stop
         >
           <!-- Image area: max 50vh, never cropped -->
-          <div class="relative w-full max-h-[50vh] flex-shrink-0 bg-neutral-100 flex items-center justify-center overflow-hidden">
+          <div
+            class="relative w-full max-h-[50vh] flex-shrink-0 bg-neutral-100 flex items-center justify-center overflow-hidden"
+            @touchstart.passive="onLightboxTouchStart"
+            @touchend.passive="onLightboxTouchEnd"
+          >
             <BaseImage
               :photo="currentPhoto"
               :alt="getCaption(currentPhoto) || 'Photo'"
