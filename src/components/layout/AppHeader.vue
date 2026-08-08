@@ -82,10 +82,11 @@ const isActive = (path: string) => route.path === path
               :key="item.path"
               class="text-xs tracking-wide uppercase font-light transition-colors"
               :class="isActive(item.path)
-                ? 'text-minimal-black hover:text-accent'
-                : 'text-minimal-medium hover:text-minimal-black'"
+                ? 'text-minimal-black md:hover:text-accent'
+                : 'text-minimal-medium md:hover:text-minimal-black'"
               :aria-current="isActive(item.path) ? 'page' : undefined"
               @click="navigateTo(item.path)"
+              @touchstart.passive="() => {}"
             >
               {{ t(item.key) }}
             </button>
@@ -159,9 +160,10 @@ const isActive = (path: string) => route.path === path
           class="text-base tracking-[0.35em] uppercase font-light transition-colors duration-300"
           :class="isActive(item.path)
             ? 'text-neutral-900'
-            : 'text-neutral-500 hover:text-neutral-800'"
+            : 'text-neutral-500 md:hover:text-neutral-800'"
           :aria-current="isActive(item.path) ? 'page' : undefined"
           @click="navigateTo(item.path)"
+          @touchstart.passive="() => {}"
         >
           {{ t(item.key) }}
         </button>

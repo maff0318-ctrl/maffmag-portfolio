@@ -55,6 +55,7 @@ const onImageLoad = () => {
     class="group relative overflow-hidden cursor-pointer photo-card-container"
     :class="{ 'photo-loaded': imageLoaded }"
     @click="handleClick"
+    @touchstart.passive="() => {}"
   >
     <!-- Inner Image Wrapper to constrain zoom effect -->
     <!-- transform + will-change + transform-gpu force this onto its own GPU
@@ -64,7 +65,7 @@ const onImageLoad = () => {
          img element reserves space via width/height once cover dimensions load. -->
     <div
       :class="[
-        'relative overflow-hidden transform-gpu will-change-transform transition-transform duration-300 ease-out delay-0 group-hover:scale-105',
+        'relative overflow-hidden transform-gpu will-change-transform transition-transform duration-300 ease-out delay-0 md:group-hover:scale-105',
         { 'aspect-square': forceSquare }
       ]"
     >
@@ -83,7 +84,7 @@ const onImageLoad = () => {
     
     <!-- Dark Overlay: opacity-only (GPU-composited), NOT background-color -->
     <div
-      class="absolute inset-0 bg-black opacity-0 group-hover:opacity-25 transition-opacity duration-300 ease-out delay-0 pointer-events-none will-change-[opacity]"
+      class="absolute inset-0 bg-black opacity-0 md:group-hover:opacity-25 transition-opacity duration-300 ease-out delay-0 pointer-events-none will-change-[opacity]"
     />
     
     <!-- Year Display: floating overlay on both mobile and desktop.
@@ -98,8 +99,9 @@ const onImageLoad = () => {
     
     <!-- Bottom-Left Icon: Heart (hidden -> fade in + slide up) -->
     <button
-      class="absolute bottom-4 left-4 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out text-minimal-white hover:scale-110 z-10"
+      class="absolute bottom-4 left-4 opacity-0 transform translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-300 ease-out text-minimal-white md:hover:scale-110 z-10"
       @click="(e) => handleIconClick(e, 'heart')"
+      @touchstart.passive="() => {}"
       aria-label="Like photo"
     >
       <svg 
@@ -120,7 +122,7 @@ const onImageLoad = () => {
     <!-- Optional: Title/Location Info (for desktop, center overlay on hover) -->
     <div
       v-if="showInfo"
-      class="hidden md:flex absolute inset-0 flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out pointer-events-none z-10 text-center px-4"
+      class="hidden md:flex absolute inset-0 flex-col items-center justify-center opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 ease-in-out pointer-events-none z-10 text-center px-4"
     >
       <h3 class="font-serif text-minimal-white text-lg font-light tracking-widest mb-1 uppercase photo-info-shadow">
         {{ photo.title }}

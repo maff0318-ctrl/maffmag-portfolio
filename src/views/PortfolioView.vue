@@ -214,8 +214,9 @@ const handlePhotoClick = (photo: Photo): void => {
           class="py-2 text-xs tracking-wide uppercase font-sans font-light transition-colors duration-300"
           :class="selectedContinent === key
             ? 'text-minimal-black'
-            : 'text-neutral-400 hover:text-minimal-black'"
+            : 'text-neutral-400 md:hover:text-minimal-black'"
           @click="selectContinent(key)"
+          @touchstart.passive="() => {}"
         >
           {{ continentLabel(key) }}
         </button>

@@ -6,8 +6,9 @@ const { currentLang, toggleLanguage } = useLanguage()
 
 <template>
   <button
-    class="flex items-center space-x-2 text-xs tracking-wider font-light text-minimal-medium hover:text-minimal-black transition-colors"
+    class="flex items-center space-x-2 text-xs tracking-wider font-light text-minimal-medium md:hover:text-minimal-black transition-colors"
     @click="toggleLanguage"
+    @touchstart.passive="() => {}"
     aria-label="Toggle language"
   >
     <span :class="currentLang === 'en' ? 'text-minimal-black' : ''">ENG</span>
