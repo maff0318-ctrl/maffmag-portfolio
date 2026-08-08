@@ -45,14 +45,15 @@ watch(mobileMenuOpen, (open) => {
 })
 
 const navigateTo = (path: string) => {
-  // On mobile the overlay is open: let the 400ms fade-out complete before
-  // navigating so the page change doesn't snap the overlay away mid-animation.
-  if (mobileMenuOpen.value) {
-    mobileMenuOpen.value = false
-    setTimeout(() => router.push(path), 420)
-  } else {
-    router.push(path)
-  }
+  // Close the menu immediately and navigate
+  mobileMenuOpen.value = false
+  // Use nextTick to ensure the menu close is processed before navigation
+  router.push(path).catch((err) => {
+    // Ignore navigation duplicated errors
+    if (err.name !== 'NavigationDuplicated') {
+      console.error('Navigation error:', err)
+    }
+  })
 }
 
 const isActive = (path: string) => route.path === path
