@@ -657,10 +657,32 @@ const totalPhotoCount = computed(
                 style="max-width:100%; max-height:100%;"
               />
 
-              <!-- Desktop-only Previous arrow — hidden on first photo or single-photo albums -->
+              <!-- Desktop-only: full-height transparent click zones (FB-style).
+                   Left half → previous, right half → next.
+                   Only rendered when there is more than one photo so single-album
+                   views are not accidentally navigated away.
+                   z-10 sits above the image; arrow buttons below use z-20. -->
+              <template v-if="photos.length > 1">
+                <!-- Left click zone → previous (hidden at first photo) -->
+                <div
+                  v-if="(currentPhotoIndex ?? 0) > 0"
+                  class="hidden md:block absolute left-0 top-0 w-1/2 h-full z-10 cursor-pointer"
+                  aria-label="Previous photo"
+                  @click.stop="previousPhoto"
+                />
+                <!-- Right click zone → next (hidden at last loaded photo) -->
+                <div
+                  v-if="(currentPhotoIndex ?? 0) < (totalPhotos || photos.length) - 1"
+                  class="hidden md:block absolute right-0 top-0 w-1/2 h-full z-10 cursor-pointer"
+                  aria-label="Next photo"
+                  @click.stop="nextPhoto"
+                />
+              </template>
+
+              <!-- Desktop-only Previous arrow — sits above click zone at z-20 -->
               <button
                 v-if="photos.length > 1 && (currentPhotoIndex ?? 0) > 0"
-                class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center bg-black/40 hover:bg-black/70 text-white/70 hover:text-white backdrop-blur-sm transition-all duration-200 ease-out"
+                class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 z-20 items-center justify-center bg-black/40 hover:bg-black/70 text-white/70 hover:text-white backdrop-blur-sm transition-all duration-200 ease-out"
                 aria-label="Previous photo"
                 @click.stop="previousPhoto"
               >
@@ -669,10 +691,10 @@ const totalPhotoCount = computed(
                 </svg>
               </button>
 
-              <!-- Desktop-only Next arrow — hidden on last photo or single-photo albums -->
+              <!-- Desktop-only Next arrow — sits above click zone at z-20 -->
               <button
                 v-if="photos.length > 1 && (currentPhotoIndex ?? 0) < (totalPhotos || photos.length) - 1"
-                class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center bg-black/40 hover:bg-black/70 text-white/70 hover:text-white backdrop-blur-sm transition-all duration-200 ease-out"
+                class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 z-20 items-center justify-center bg-black/40 hover:bg-black/70 text-white/70 hover:text-white backdrop-blur-sm transition-all duration-200 ease-out"
                 aria-label="Next photo"
                 @click.stop="nextPhoto"
               >
