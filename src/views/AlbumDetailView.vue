@@ -249,10 +249,12 @@ const EDGE_GUARD = 40        // px from left edge that we leave to the browser
 
 let swipeTouchStartX = 0
 let swipeTouchStartY = 0
+let isSwiping = false        // flag to prevent tap-click at end of swipe
 
 const onLightboxTouchStart = (e: TouchEvent) => {
   swipeTouchStartX = e.touches[0].clientX
   swipeTouchStartY = e.touches[0].clientY
+  isSwiping = false
 }
 
 const onLightboxTouchEnd = (e: TouchEvent) => {
@@ -265,6 +267,9 @@ const onLightboxTouchEnd = (e: TouchEvent) => {
   // Only register as a horizontal swipe if X movement dominates
   if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) < Math.abs(dy)) return
 
+  // Mark as swiping to prevent click handler from firing
+  isSwiping = true
+
   // REVERSED SWIPE DIRECTION:
   // Swipe right (finger moves right) → next photo
   // Swipe left (finger moves left) → previous photo
@@ -272,6 +277,32 @@ const onLightboxTouchEnd = (e: TouchEvent) => {
     nextPhoto()       // swipe right → forward
   } else {
     previousPhoto()   // swipe left → back
+  }
+
+  // Reset flag after a short delay (longer than typical click event timing)
+  setTimeout(() => { isSwiping = false }, 300)
+}
+
+// ── Instagram-style tap navigation ────────────────────────────────────────
+// Tap left half of screen → previous photo
+// Tap right half of screen → next photo
+// Respects boundary locks and ignores interactive elements (buttons, links)
+const onMobileLightboxClick = (e: MouseEvent) => {
+  // Ignore if we just finished a swipe gesture
+  if (isSwiping) return
+
+  // Ignore clicks on interactive elements (buttons, links)
+  const target = e.target as HTMLElement
+  if (target.closest('button, a')) return
+
+  // Calculate if click is on left or right half of screen
+  const clickX = e.clientX
+  const screenMidpoint = window.innerWidth / 2
+
+  if (clickX < screenMidpoint) {
+    previousPhoto()  // Left half → previous
+  } else {
+    nextPhoto()      // Right half → next
   }
 }
 
@@ -564,7 +595,7 @@ const totalPhotoCount = computed(
         <!-- MOBILE MODAL ------------------------------------------------ -->
         <div
           class="md:hidden fixed inset-0 z-50 h-[100dvh] w-full overflow-y-auto bg-white flex flex-col"
-          @click.stop
+          @click="onMobileLightboxClick"
           @touchstart.passive="onLightboxTouchStart"
           @touchend.passive="onLightboxTouchEnd"
         >
