@@ -7,6 +7,7 @@ import AppHeader from '@/components/layout/AppHeader.vue'
 import { useLanguage } from '@/composables/useLanguage'
 import { albumService } from '@/services/albumService'
 import { photoService } from '@/services/photoService'
+import { getImageUrl } from '@/utils/imageUtils'
 import type { Album, Photo } from '@/lib/supabase'
 
 const router = useRouter()
@@ -200,6 +201,53 @@ const currentPhoto = computed(() => {
     return photos.value[currentPhotoIndex.value]
   }
   return null
+})
+
+// ── Silent Adjacent Image Preloading ──────────────────────────────────────
+// Preload the next and previous photos in the background to eliminate swipe
+// lag on mobile data. Uses native Image() preloading which caches in the
+// browser automatically. Only preloads adjacent images (not entire album) to
+// minimize bandwidth usage.
+const preloadAdjacentPhotos = () => {
+  if (currentPhotoIndex.value === null || photos.value.length === 0) return
+
+  const currentIndex = currentPhotoIndex.value
+  
+  // Determine which variant to preload based on viewport
+  // Mobile uses 'medium' (800px), desktop uses 'large' (1920px)
+  const isMobile = window.innerWidth < 768
+  const variant = isMobile ? 'medium' : 'large'
+
+  // Preload next photo (if exists)
+  const nextIndex = currentIndex + 1
+  if (nextIndex < photos.value.length) {
+    const nextPhoto = photos.value[nextIndex]
+    const nextUrl = getImageUrl(nextPhoto, variant)
+    const preloadNext = new Image()
+    preloadNext.src = nextUrl
+  }
+
+  // Preload previous photo (if exists)
+  const prevIndex = currentIndex - 1
+  if (prevIndex >= 0) {
+    const prevPhoto = photos.value[prevIndex]
+    const prevUrl = getImageUrl(prevPhoto, variant)
+    const preloadPrev = new Image()
+    preloadPrev.src = prevUrl
+  }
+}
+
+// Watch currentPhotoIndex and trigger preload whenever it changes
+watch(currentPhotoIndex, (newIndex) => {
+  if (newIndex !== null && isLightboxOpen.value) {
+    // Use requestIdleCallback if available, otherwise setTimeout
+    // This ensures preloading doesn't block the main UI thread
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => preloadAdjacentPhotos())
+    } else {
+      setTimeout(() => preloadAdjacentPhotos(), 50)
+    }
+  }
 })
 
 // Editorial paragraph parser for the mobile lightbox.
