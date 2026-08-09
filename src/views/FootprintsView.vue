@@ -1071,7 +1071,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative w-full h-screen overflow-hidden bg-minimal-white flex flex-col">
+  <div class="relative w-full h-screen bg-minimal-white flex flex-col">
     <!-- Header - locked at top, always visible (never scrolls away) -->
     <AppHeader position="sticky" />
 
