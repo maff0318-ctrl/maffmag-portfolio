@@ -17,7 +17,11 @@ const isLoading = ref(true)
 // "highlight" type records (Bento photo cards with a big metric) render via
 // HighlightCard in the 3-column grid. All other types (data/photo/split)
 // keep using the original 4-column CMS grid below.
-const highlightRecords = computed(() => records.value.filter(r => r.type === 'highlight'))
+const highlightRecords = computed(() => {
+  const filtered = records.value.filter(r => r.type === 'highlight')
+  console.log('🔍 Computing highlightRecords:', filtered.length, filtered)
+  return filtered
+})
 const legacyRecords = computed(() => records.value.filter(r => r.type !== 'highlight'))
 
 const loadRecords = async () => {
