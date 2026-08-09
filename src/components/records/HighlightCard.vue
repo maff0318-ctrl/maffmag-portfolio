@@ -35,12 +35,11 @@ withDefaults(defineProps<Props>(), {
       class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
     />
 
-    <!-- Subtle bottom-up gradient - only darkens the lower portion behind the
-         metadata tag, leaving the photo bright and crisp everywhere else -->
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+    <!-- Dark gradient overlay - visible on mobile, hover-reveal on desktop -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"></div>
 
-    <!-- Content -->
-    <div class="relative z-10 flex h-full flex-col justify-between px-6 pt-6 pb-8 md:px-8 md:pt-8 md:pb-8">
+    <!-- Content - visible on mobile, hover-reveal on desktop -->
+    <div class="relative z-10 flex h-full flex-col justify-between px-6 pt-6 pb-8 md:px-8 md:pt-8 md:pb-8 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
       <!-- Category Label -->
       <p class="text-[10px] md:text-xs tracking-[0.25em] uppercase text-white/90 font-light drop-shadow-sm">
         {{ category }}
