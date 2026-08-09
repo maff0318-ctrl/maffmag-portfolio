@@ -34,11 +34,11 @@ const caption = computed(() =>
         class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
       />
       
-      <!-- Overlay (fades in on hover) -->
-      <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out"></div>
+      <!-- Overlay (visible on mobile, fade in on desktop hover) -->
+      <div class="absolute inset-0 bg-black/20 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-700 ease-out"></div>
       
-      <!-- Text Content (fades in on hover) -->
-      <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out p-6">
+      <!-- Text Content (visible on mobile, fade in on desktop hover) -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-700 ease-out p-6">
         <h3 class="text-xl md:text-2xl font-thin text-white tracking-[0.2em] uppercase mb-3 text-center">
           {{ title }}
         </h3>
