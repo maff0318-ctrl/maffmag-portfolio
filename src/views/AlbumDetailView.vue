@@ -166,25 +166,33 @@ const nextPhoto = async () => {
 
   const nextIndex = currentPhotoIndex.value + 1
 
-  // If we've reached the end of the currently loaded batch and the server
-  // has more, fetch the next page first, then advance.
-  if (nextIndex >= photos.value.length && hasMorePhotos.value) {
-    await loadMorePhotos()
+  // BOUNDARY CHECK: Disable loop-around — freeze at the last photo
+  if (nextIndex >= photos.value.length) {
+    // If we have more photos on the server, try to load them
+    if (hasMorePhotos.value) {
+      await loadMorePhotos()
+      // After loading, check again if we can advance
+      if (nextIndex < photos.value.length) {
+        currentPhotoIndex.value = nextIndex
+      }
+      // Otherwise stay put (we're at the true end)
+    }
+    // If no more photos available, do nothing (freeze at last photo)
+    return
   }
 
-  // After a potential fetch, advance — or wrap around if truly at the end.
-  currentPhotoIndex.value = nextIndex < photos.value.length
-    ? nextIndex
-    : 0
+  currentPhotoIndex.value = nextIndex
 }
 
 const previousPhoto = () => {
-  if (currentPhotoIndex.value !== null && photos.value) {
-    currentPhotoIndex.value = 
-      currentPhotoIndex.value === 0 
-        ? photos.value.length - 1 
-        : currentPhotoIndex.value - 1
+  if (currentPhotoIndex.value === null) return
+  
+  // BOUNDARY CHECK: Disable loop-around — freeze at the first photo
+  if (currentPhotoIndex.value === 0) {
+    return  // Do nothing, stay at first photo
   }
+  
+  currentPhotoIndex.value = currentPhotoIndex.value - 1
 }
 
 const currentPhoto = computed(() => {
@@ -257,10 +265,13 @@ const onLightboxTouchEnd = (e: TouchEvent) => {
   // Only register as a horizontal swipe if X movement dominates
   if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) < Math.abs(dy)) return
 
-  if (dx < 0) {
-    nextPhoto()       // swipe left → forward
+  // REVERSED SWIPE DIRECTION:
+  // Swipe right (finger moves right) → next photo
+  // Swipe left (finger moves left) → previous photo
+  if (dx > 0) {
+    nextPhoto()       // swipe right → forward
   } else {
-    previousPhoto()   // swipe right → back
+    previousPhoto()   // swipe left → back
   }
 }
 
@@ -554,12 +565,12 @@ const totalPhotoCount = computed(
         <div
           class="md:hidden fixed inset-0 z-50 h-[100dvh] w-full overflow-y-auto bg-white flex flex-col"
           @click.stop
+          @touchstart.passive="onLightboxTouchStart"
+          @touchend.passive="onLightboxTouchEnd"
         >
           <!-- Image area: max 50vh, never cropped -->
           <div
             class="relative w-full max-h-[50vh] flex-shrink-0 bg-neutral-100 flex items-center justify-center overflow-hidden"
-            @touchstart.passive="onLightboxTouchStart"
-            @touchend.passive="onLightboxTouchEnd"
           >
             <BaseImage
               :photo="currentPhoto"
