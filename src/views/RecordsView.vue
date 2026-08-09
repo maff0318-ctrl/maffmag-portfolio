@@ -82,7 +82,7 @@ onMounted(() => {
       </div>
 
       <!-- Bento Grid: "Travel Extreme" highlight cards (photo + big metric) -->
-      <div v-else class="container mx-auto px-6 mb-4">
+      <div v-else class="container mx-auto px-6 mb-16">
         <!-- Bento Grid: real CMS highlight records only -->
         <div v-if="highlightRecords.length > 0" class="grid grid-cols-1 md:grid-cols-3 gap-3 auto-rows-[320px]">
           <div
