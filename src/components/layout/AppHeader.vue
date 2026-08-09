@@ -137,9 +137,14 @@ const isActive = (path: string) => route.path === path
       <!-- Top bar: logo + close -->
       <div class="container-minimal py-4">
         <div class="flex items-center justify-between">
-          <div class="cursor-pointer" @click="navigateTo('/')">
-            <LogoIcon color="dark" size="md" />
+          <!-- Left cluster: logo (matching closed header structure) -->
+          <div class="flex items-center gap-4">
+            <div class="cursor-pointer" @click="navigateTo('/')">
+              <LogoIcon color="dark" size="md" />
+            </div>
           </div>
+
+          <!-- Right cluster: close button -->
           <button
             class="w-11 h-11 flex items-center justify-center bg-transparent border-none cursor-pointer text-neutral-600"
             aria-label="Close menu"
