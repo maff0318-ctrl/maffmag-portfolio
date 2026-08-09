@@ -129,25 +129,27 @@ const isActive = (path: string) => route.path === path
   >
     <div
       v-if="mobileMenuOpen"
-      class="fixed inset-0 z-50 flex flex-col bg-white/95 backdrop-blur-md md:hidden"
+      class="fixed inset-0 z-50 flex flex-col bg-white/95 backdrop-blur-md md:hidden border-b border-minimal-light"
       role="dialog"
       aria-modal="true"
       aria-label="Navigation menu"
     >
       <!-- Top bar: logo + close -->
-      <div class="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
-        <div class="cursor-pointer" @click="navigateTo('/')">
-          <LogoIcon color="dark" size="md" />
+      <div class="container-minimal py-4">
+        <div class="flex items-center justify-between">
+          <div class="cursor-pointer" @click="navigateTo('/')">
+            <LogoIcon color="dark" size="md" />
+          </div>
+          <button
+            class="w-11 h-11 flex items-center justify-center bg-transparent border-none cursor-pointer text-neutral-600"
+            aria-label="Close menu"
+            @click="mobileMenuOpen = false"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
-        <button
-          class="w-11 h-11 flex items-center justify-center bg-transparent border-none cursor-pointer text-neutral-600"
-          aria-label="Close menu"
-          @click="mobileMenuOpen = false"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
       </div>
 
       <!-- Nav links: vertically centred, large tracking -->
