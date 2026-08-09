@@ -72,11 +72,12 @@ const onImageLoad = () => {
       <!-- Image (no transform, parent handles zoom) -->
       <div class="w-full h-full">
         <BaseImage
-          :src="photo.image"
+          :photo="photo"
           :alt="photo.title"
           :aspect-ratio="forceSquare ? 'square' : 'auto'"
           :lazy="!priority"
           :priority="priority"
+          variant="medium"
           class="w-full h-full"
         />
       </div>
