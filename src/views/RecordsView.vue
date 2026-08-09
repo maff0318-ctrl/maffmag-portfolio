@@ -88,7 +88,10 @@ onMounted(() => {
           <div
             v-for="record in highlightRecords"
             :key="record.id"
-            :class="record.is_featured ? 'md:col-span-2' : 'md:col-span-1'"
+            :class="[
+              'relative',
+              record.is_featured ? 'md:col-span-2' : 'md:col-span-1'
+            ]"
           >
             <HighlightCard
               :metric="record.metric || ''"
