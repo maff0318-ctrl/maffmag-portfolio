@@ -56,9 +56,9 @@ const handleSubmit = async () => {
 
 <template>
   <div class="min-h-screen md:h-screen overflow-x-hidden md:overflow-hidden flex flex-col bg-white">
-    <AppHeader position="static" />
+    <AppHeader position="sticky" />
 
-    <main class="flex-1 md:overflow-hidden container-minimal flex items-start md:items-center py-8 md:py-6 pb-32 md:pb-6">
+    <main class="flex-1 md:overflow-hidden container-minimal flex items-start md:items-center py-8 md:py-6 pb-32 md:pb-6 pt-20 md:pt-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-5xl mx-auto w-full">
         <section class="flex flex-col justify-center" aria-labelledby="contact-heading">
           <p class="text-xs text-neutral-400 tracking-[0.3em] uppercase font-sans mb-3" aria-hidden="true">

@@ -1073,7 +1073,7 @@ onUnmounted(() => {
 <template>
   <div class="relative w-full h-screen overflow-hidden bg-minimal-white flex flex-col">
     <!-- Header - locked at top, always visible (never scrolls away) -->
-    <AppHeader position="static" />
+    <AppHeader position="sticky" />
 
     <!-- Immersive Map Canvas - fills the space between header and stats bar.
          `isolate` creates a stacking context so the map's high z-index overlays
