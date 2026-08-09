@@ -28,8 +28,9 @@ const loadRecords = async () => {
     // for a personal site where all published content is intentionally shown.
     records.value = await recordService.getAllAdmin()
     console.log('✅ Loaded records:', records.value.length)
-    console.log('📋 Record types:', records.value.map(r => r.type))
-    console.log('🔦 Highlight records:', records.value.filter(r => r.type === 'highlight').length)
+    console.log('📋 All records:', records.value)
+    console.log('🔦 Highlight records:', highlightRecords.value.length)
+    console.log('📍 Highlight records detail:', highlightRecords.value)
   } catch (error) {
     console.error('❌ Error loading records:', error)
   } finally {
