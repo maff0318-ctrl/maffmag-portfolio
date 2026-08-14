@@ -3,6 +3,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import BaseImage from '@/components/ui/BaseImage.vue'
 import LoadMoreButton from '@/components/ui/LoadMoreButton.vue'
+import LogoIcon from '@/components/ui/LogoIcon.vue'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import { useLanguage } from '@/composables/useLanguage'
 import { albumService } from '@/services/albumService'
@@ -372,8 +373,11 @@ const totalPhotoCount = computed(
 
 <template>
   <!-- Loading State -->
-  <div v-if="loading" class="min-h-screen bg-minimal-white flex items-center justify-center">
-    <p class="text-minimal-medium font-light tracking-wide">Loading album...</p>
+  <div v-if="loading" class="min-h-screen flex flex-col items-center justify-center bg-minimal-white gap-6">
+    <LogoIcon animated color="primary" size="lg" />
+    <p class="text-xs tracking-[0.2em] text-neutral-400 font-light uppercase">
+      Loading...
+    </p>
   </div>
 
   <!-- Album Content -->
