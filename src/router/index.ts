@@ -44,6 +44,12 @@ const router = createRouter({
       name: 'contact',
       component: () => import('@/views/ContactView.vue'),
     },
+    // Temporary isolated preview for the opt-in LogoIcon animation.
+    {
+      path: '/test-logo',
+      name: 'test-logo',
+      component: () => import('@/views/LogoTestView.vue'),
+    },
     // Admin routes
     {
       path: '/admin/login',
