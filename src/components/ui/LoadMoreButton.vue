@@ -37,33 +37,26 @@ const statusText = () => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center py-12 space-y-4">
+  <div class="mt-24 mb-32 flex flex-col items-center justify-center space-y-4">
     <!-- Status Text -->
     <p class="text-xs text-minimal-medium font-light tracking-widest uppercase">
       {{ statusText() }}
     </p>
 
-    <!-- Load More Button -->
+    <!-- Editorial text-only Load More control -->
     <button
-      @click="emit('loadMore')"
       :disabled="disabled || loading"
-      class="group relative px-12 py-4 border border-minimal-light text-minimal-dark font-light tracking-[0.3em] text-xs uppercase transition-all duration-300 hover:bg-minimal-black hover:text-white hover:border-minimal-black disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-minimal-dark disabled:hover:border-minimal-light"
+      class="group relative inline-flex flex-col items-center justify-center pb-1 text-xs tracking-[0.2em] uppercase font-light text-neutral-400 transition-colors duration-500 hover:text-neutral-900 disabled:cursor-not-allowed disabled:opacity-50"
+      @click="emit('loadMore')"
     >
-      <span class="relative z-10">{{ buttonText() }}</span>
+      <span v-if="!loading">{{ buttonText() }}</span>
+      <span v-else class="animate-pulse">{{ buttonText() }}</span>
 
-      <!-- Animated loading dots -->
-      <span v-if="loading" class="absolute inset-0 flex items-center justify-center">
-        <span class="flex space-x-1">
-          <span class="w-1.5 h-1.5 bg-minimal-dark rounded-full animate-bounce" style="animation-delay: 0ms"></span>
-          <span class="w-1.5 h-1.5 bg-minimal-dark rounded-full animate-bounce" style="animation-delay: 150ms"></span>
-          <span class="w-1.5 h-1.5 bg-minimal-dark rounded-full animate-bounce" style="animation-delay: 300ms"></span>
-        </span>
-      </span>
-
-      <!-- Hover effect line -->
+      <!-- Dynamic underline draws in from the left on hover. -->
       <span
-        class="absolute bottom-0 left-1/2 w-0 h-px bg-minimal-black transition-all duration-300 -translate-x-1/2 group-hover:w-full"
-      ></span>
+        v-if="!loading"
+        class="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-neutral-900 transition-transform duration-500 ease-out group-hover:scale-x-100"
+      />
     </button>
 
     <!-- Progress indicator -->
@@ -71,26 +64,7 @@ const statusText = () => {
       <div
         class="h-full bg-minimal-dark transition-all duration-500"
         :style="{ width: `${(currentCount / totalCount) * 100}%` }"
-      ></div>
+      />
     </div>
   </div>
 </template>
-
-<style scoped>
-button {
-  border-radius: 0 !important;
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-0.5rem);
-  }
-}
-
-.animate-bounce {
-  animation: bounce 1s infinite;
-}
-</style>
